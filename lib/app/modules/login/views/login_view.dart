@@ -23,8 +23,6 @@ class LoginView extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(LoginController());
-
     size = MediaQuery.of(context).size;
     viewInsets = MediaQuery.of(context).viewInsets.bottom;
     defaultLoginSize = size.height - (size.height * 0.2);
