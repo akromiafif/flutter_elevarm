@@ -34,6 +34,28 @@ class LoginView extends GetView<LoginController> {
       body: Obx(
         () => Stack(
           children: <Widget>[
+            Positioned(
+              top: 100,
+              right: -50,
+              child: Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: kPrimaryColor),
+              ),
+            ),
+            Positioned(
+              top: -50,
+              left: -50,
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: kPrimaryColor),
+              ),
+            ),
             AnimatedOpacity(
               duration: controller.animationDuration,
               opacity: controller.isLogin.value ? 0.0 : 1.0,
@@ -46,8 +68,8 @@ class LoginView extends GetView<LoginController> {
                   child: IconButton(
                     icon: const Icon(Icons.close),
                     onPressed: () {
-                      controller.isLogin.value = !controller.isLogin.value;
                       controller.animationController.reverse();
+                      controller.isLogin.value = !controller.isLogin.value;
                     },
                     color: kPrimaryColor,
                   ),
