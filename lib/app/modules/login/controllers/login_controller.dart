@@ -1,23 +1,22 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class LoginController extends GetxController {
-  //TODO: Implement LoginController
+class LoginController extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  RxBool isLogin = true.obs;
+  late AnimationController animationController =
+      AnimationController(vsync: this, duration: animationDuration);
+  Duration animationDuration = const Duration(microseconds: 270);
 
-  final count = 0.obs;
   @override
-  void onInit() {
-    super.onInit();
+  void ontInit() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   }
 
   @override
-  void onReady() {
-    super.onReady();
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }
