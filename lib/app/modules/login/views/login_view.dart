@@ -34,68 +34,29 @@ class LoginView extends GetView<LoginController> {
       body: Obx(
         () => Stack(
           children: <Widget>[
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                width: size.width,
-                height: size.height * 0.1,
-                child: IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () {
-                    controller.isLogin.value = !controller.isLogin.value;
-                    controller.animationController.reverse();
-                  },
-                  color: kPrimaryColor,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: SingleChildScrollView(
-                child: SizedBox(
+            AnimatedOpacity(
+              duration: controller.animationDuration,
+              opacity: controller.isLogin.value ? 0.0 : 1.0,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  alignment: Alignment.bottomCenter,
                   width: size.width,
-                  height: defaultLoginSize,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Welcome Back',
-                        style: GoogleFonts.lato(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 40),
-                      SvgPicture.asset('assets/images/login.svg'),
-                      const SizedBox(height: 40),
-                      RoundedInput(
-                        icon: Icons.email,
-                        size: size,
-                        hint: 'Username',
-                        isSecure: false,
-                      ),
-                      RoundedInput(
-                        icon: Icons.fingerprint,
-                        size: size,
-                        hint: 'Password',
-                        isSecure: true,
-                      ),
-                      RoundedButton(title: 'LOGIN', size: size)
-                    ],
+                  height: size.height * 0.1,
+                  child: IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () {
+                      controller.isLogin.value = !controller.isLogin.value;
+                      controller.animationController.reverse();
+                    },
+                    color: kPrimaryColor,
                   ),
                 ),
               ),
             ),
-            AnimatedBuilder(
-              animation: controller.animationController,
-              builder: ((context, child) {
-                return buildRegisterContainer();
-              }),
-            ),
-            Visibility(
-              visible: !controller.isLogin.value,
+            AnimatedOpacity(
+              opacity: controller.isLogin.value ? 1.0 : 0.0,
+              duration: controller.animationDuration * 4,
               child: Align(
                 alignment: Alignment.center,
                 child: SingleChildScrollView(
@@ -107,25 +68,19 @@ class LoginView extends GetView<LoginController> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          'Welcome',
+                          'Welcome Back',
                           style: GoogleFonts.lato(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(height: 40),
-                        SvgPicture.asset('assets/images/register.svg'),
+                        SvgPicture.asset('assets/images/login.svg'),
                         const SizedBox(height: 40),
-                        RoundedInput(
-                          icon: Icons.person_outlined,
-                          size: size,
-                          hint: 'Username',
-                          isSecure: false,
-                        ),
                         RoundedInput(
                           icon: Icons.email,
                           size: size,
-                          hint: 'Email',
+                          hint: 'Username',
                           isSecure: false,
                         ),
                         RoundedInput(
@@ -134,8 +89,70 @@ class LoginView extends GetView<LoginController> {
                           hint: 'Password',
                           isSecure: true,
                         ),
-                        RoundedButton(title: 'SIGN UP', size: size)
+                        RoundedButton(title: 'LOGIN', size: size)
                       ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            AnimatedBuilder(
+              animation: controller.animationController,
+              builder: ((context, child) {
+                if (viewInsets == 0 && controller.isLogin.value) {
+                  return buildRegisterContainer();
+                } else if (!controller.isLogin.value) {
+                  return buildRegisterContainer();
+                }
+                return Container();
+              }),
+            ),
+            AnimatedOpacity(
+              duration: controller.animationDuration * 5,
+              opacity: controller.isLogin.value ? 0.0 : 1.0,
+              child: Visibility(
+                visible: !controller.isLogin.value,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: SingleChildScrollView(
+                    child: SizedBox(
+                      width: size.width,
+                      height: defaultLoginSize,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Welcome',
+                            style: GoogleFonts.lato(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 40),
+                          SvgPicture.asset('assets/images/register.svg'),
+                          const SizedBox(height: 40),
+                          RoundedInput(
+                            icon: Icons.person_outlined,
+                            size: size,
+                            hint: 'Username',
+                            isSecure: false,
+                          ),
+                          RoundedInput(
+                            icon: Icons.email,
+                            size: size,
+                            hint: 'Email',
+                            isSecure: false,
+                          ),
+                          RoundedInput(
+                            icon: Icons.fingerprint,
+                            size: size,
+                            hint: 'Password',
+                            isSecure: true,
+                          ),
+                          RoundedButton(title: 'SIGN UP', size: size)
+                        ],
+                      ),
                     ),
                   ),
                 ),
