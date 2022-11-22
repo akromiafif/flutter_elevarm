@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_elevarm/app/modules/profile/views/profile_view.dart';
 import 'package:flutter_elevarm/app/providers/services.dart';
 import 'package:get/get.dart';
 
@@ -42,6 +43,8 @@ class LoginController extends GetxController
         btnCancelOnPress: () {},
         btnOkOnPress: () {},
       ).show();
+    } else {
+      Get.to(() => const ProfileView());
     }
   }
 
@@ -62,7 +65,7 @@ class LoginController extends GetxController
     } else {
       AwesomeDialog(
         context: context,
-        dialogType: DialogType.error,
+        dialogType: DialogType.success,
         animType: AnimType.rightSlide,
         title: 'Success',
         desc: 'Congrats!! please login again',

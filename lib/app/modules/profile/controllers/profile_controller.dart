@@ -1,23 +1,27 @@
+import 'package:flutter_elevarm/app/data/models/user.dart';
+import 'package:flutter_elevarm/app/providers/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ProfileController extends GetxController {
-  //TODO: Implement ProfileController
+  var user = User(email: '', id: '', username: '', password: '').obs;
+  var isLoading = true.obs;
 
-  final count = 0.obs;
   @override
   void onInit() {
-    super.onInit();
+    var userInfo = GetStorage().read('user-info');
+    getUserInfo(userInfo["id"]);
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void getUserInfo(String id) async {
+    try {
+      var response = await ServiceProvider().getUserInfo(id);
+      print(response);
+      user.value = response;
+    } catch (err) {
+      print(err);
+    } finally {
+      isLoading.value = false;
+    }
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_elevarm/app/data/models/user.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class ServiceProvider {
@@ -21,6 +22,7 @@ class ServiceProvider {
 
     var data = json.decode(response.body);
     if (response.statusCode == 200) {
+      GetStorage().write('user-info', data["result"]);
       return userFromJson(json.encode(data["result"]));
     } else {
       return null;
@@ -46,5 +48,13 @@ class ServiceProvider {
     } else {
       return null;
     }
+  }
+
+  Future<User> getUserInfo(String id) async {
+    final response =
+        await client.get(Uri.parse('$BASE_URL/users/user-info/$id'));
+
+    print(response.body);
+    return userFromJson(response.body);
   }
 }

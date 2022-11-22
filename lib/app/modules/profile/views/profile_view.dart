@@ -12,113 +12,128 @@ class ProfileView extends GetView<ProfileController> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 70, horizontal: 40),
-            child: Column(
-              children: <Widget>[
-                Stack(
-                  children: [
-                    SizedBox(
-                      width: 150,
-                      height: 150,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: const Image(
-                          image: AssetImage('assets/images/profile.jpg'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        width: 35,
-                        height: 35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: kPrimaryColor.withOpacity(0.8),
-                        ),
-                        child: const Icon(
-                          LineAwesomeIcons.alternate_pencil,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  'Afif Akromi',
-                  style: GoogleFonts.lato(
-                    color: tDarkColor,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  'socakromiafif@gmail.com',
-                  style: GoogleFonts.lato(
-                    fontSize: 16,
-                    color: tDarkColor,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: 200,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: kPrimaryColor,
-                      side: BorderSide.none,
-                      shape: const StadiumBorder(),
-                    ),
+          child: Obx(
+            () => controller.isLoading.value
+                ? Center(
                     child: Text(
-                      'Edit Profile',
+                      "Loading...",
                       style: GoogleFonts.lato(
-                        color: Colors.white,
+                        color: tDarkColor,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: 20,
                       ),
                     ),
+                  )
+                : Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 70, horizontal: 40),
+                    child: Column(
+                      children: <Widget>[
+                        Stack(
+                          children: [
+                            SizedBox(
+                              width: 150,
+                              height: 150,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: const Image(
+                                  image:
+                                      AssetImage('assets/images/profile.jpg'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: Container(
+                                width: 35,
+                                height: 35,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: kPrimaryColor.withOpacity(0.8),
+                                ),
+                                child: const Icon(
+                                  LineAwesomeIcons.alternate_pencil,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          controller.user.value.username,
+                          style: GoogleFonts.lato(
+                            color: tDarkColor,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          controller.user.value.email,
+                          style: GoogleFonts.lato(
+                            fontSize: 16,
+                            color: tDarkColor,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        SizedBox(
+                          width: 200,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: kPrimaryColor,
+                              side: BorderSide.none,
+                              shape: const StadiumBorder(),
+                            ),
+                            child: Text(
+                              'Edit Profile',
+                              style: GoogleFonts.lato(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Divider(),
+                        const SizedBox(height: 30),
+                        _buildProfileMenu(
+                          title: 'Settings',
+                          icon: LineAwesomeIcons.cog,
+                          endIcon: true,
+                          onPress: () {},
+                        ),
+                        _buildProfileMenu(
+                          title: 'Billing Details',
+                          icon: LineAwesomeIcons.wallet,
+                          endIcon: true,
+                          onPress: () {},
+                        ),
+                        _buildProfileMenu(
+                          title: 'User Management',
+                          icon: LineAwesomeIcons.user_check,
+                          endIcon: true,
+                          onPress: () {},
+                        ),
+                        const Divider(),
+                        _buildProfileMenu(
+                          title: 'Information',
+                          icon: LineAwesomeIcons.info,
+                          endIcon: true,
+                          onPress: () {},
+                        ),
+                        _buildProfileMenu(
+                          title: 'Logout',
+                          icon: LineAwesomeIcons.alternate_sign_out,
+                          endIcon: false,
+                          onPress: () {},
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const Divider(),
-                const SizedBox(height: 30),
-                _buildProfileMenu(
-                  title: 'Settings',
-                  icon: LineAwesomeIcons.cog,
-                  endIcon: true,
-                  onPress: () {},
-                ),
-                _buildProfileMenu(
-                  title: 'Billing Details',
-                  icon: LineAwesomeIcons.wallet,
-                  endIcon: true,
-                  onPress: () {},
-                ),
-                _buildProfileMenu(
-                  title: 'User Management',
-                  icon: LineAwesomeIcons.user_check,
-                  endIcon: true,
-                  onPress: () {},
-                ),
-                const Divider(),
-                _buildProfileMenu(
-                  title: 'Information',
-                  icon: LineAwesomeIcons.info,
-                  endIcon: true,
-                  onPress: () {},
-                ),
-                _buildProfileMenu(
-                  title: 'Logout',
-                  icon: LineAwesomeIcons.alternate_sign_out,
-                  endIcon: false,
-                  onPress: () {},
-                ),
-              ],
-            ),
           ),
         ),
       ),
