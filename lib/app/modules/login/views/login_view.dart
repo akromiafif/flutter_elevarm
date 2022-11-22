@@ -98,18 +98,29 @@ class LoginView extends GetView<LoginController> {
                         SvgPicture.asset('assets/images/login.svg'),
                         const SizedBox(height: 40),
                         RoundedInput(
+                          controller: controller.usernameLogin,
                           icon: Icons.email,
                           size: size,
                           hint: 'Username',
                           isSecure: false,
                         ),
                         RoundedInput(
+                          controller: controller.passwordLogin,
                           icon: Icons.fingerprint,
                           size: size,
                           hint: 'Password',
                           isSecure: true,
                         ),
-                        RoundedButton(title: 'LOGIN', size: size)
+                        RoundedButton(
+                          title: 'LOGIN',
+                          size: size,
+                          onTap: () async {
+                            final username = controller.usernameLogin.text;
+                            final password = controller.passwordLogin.text;
+
+                            controller.loginUser(username, password, context);
+                          },
+                        )
                       ],
                     ),
                   ),
@@ -153,24 +164,38 @@ class LoginView extends GetView<LoginController> {
                           SvgPicture.asset('assets/images/register.svg'),
                           const SizedBox(height: 40),
                           RoundedInput(
+                            controller: controller.usernameRegister,
                             icon: Icons.person_outlined,
                             size: size,
                             hint: 'Username',
                             isSecure: false,
                           ),
                           RoundedInput(
+                            controller: controller.emailRegister,
                             icon: Icons.email,
                             size: size,
                             hint: 'Email',
                             isSecure: false,
                           ),
                           RoundedInput(
+                            controller: controller.passwordRegister,
                             icon: Icons.fingerprint,
                             size: size,
                             hint: 'Password',
                             isSecure: true,
                           ),
-                          RoundedButton(title: 'SIGN UP', size: size)
+                          RoundedButton(
+                            title: 'SIGN UP',
+                            size: size,
+                            onTap: () {
+                              final username = controller.usernameRegister.text;
+                              final email = controller.emailRegister.text;
+                              final password = controller.passwordRegister.text;
+
+                              controller.signUpUser(
+                                  username, email, password, context);
+                            },
+                          )
                         ],
                       ),
                     ),

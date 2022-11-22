@@ -7,15 +7,17 @@ class RoundedButton extends StatelessWidget {
     Key? key,
     required this.size,
     this.title,
+    required this.onTap,
   }) : super(key: key);
 
   final Size size;
   final title;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       borderRadius: BorderRadius.circular(30),
       child: Container(
         width: size.width * 0.8,

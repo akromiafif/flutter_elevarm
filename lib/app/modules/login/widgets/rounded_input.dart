@@ -9,17 +9,20 @@ class RoundedInput extends StatelessWidget {
     required this.icon,
     required this.hint,
     this.isSecure,
+    required this.controller,
   }) : super(key: key);
 
   final Size size;
   final IconData icon;
   final String hint;
   final isSecure;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return InputContainer(
       child: TextField(
+        controller: controller,
         obscureText: isSecure ? true : false,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
