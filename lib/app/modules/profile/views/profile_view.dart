@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_elevarm/app/data/colors.dart';
+import 'package:flutter_elevarm/app/data/constants.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -13,18 +13,18 @@ class ProfileView extends GetView<ProfileController> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.all(30),
+            padding: const EdgeInsets.symmetric(vertical: 70, horizontal: 40),
             child: Column(
               children: <Widget>[
                 Stack(
                   children: [
                     SizedBox(
-                      width: 120,
-                      height: 120,
+                      width: 150,
+                      height: 150,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: const Image(
-                          image: AssetImage('assets/images/profile-3.jpg'),
+                          image: AssetImage('assets/images/profile.jpg'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -37,11 +37,11 @@ class ProfileView extends GetView<ProfileController> {
                         height: 35,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
-                          color: tPrimaryColor,
+                          color: kPrimaryColor.withOpacity(0.8),
                         ),
                         child: const Icon(
                           LineAwesomeIcons.alternate_pencil,
-                          color: Colors.black,
+                          color: Colors.white,
                           size: 20,
                         ),
                       ),
@@ -53,13 +53,14 @@ class ProfileView extends GetView<ProfileController> {
                   'Afif Akromi',
                   style: GoogleFonts.lato(
                     color: tDarkColor,
-                    fontSize: 20,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   'socakromiafif@gmail.com',
                   style: GoogleFonts.lato(
+                    fontSize: 16,
                     color: tDarkColor,
                   ),
                 ),
@@ -69,14 +70,14 @@ class ProfileView extends GetView<ProfileController> {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: tPrimaryColor,
+                      backgroundColor: kPrimaryColor,
                       side: BorderSide.none,
                       shape: const StadiumBorder(),
                     ),
                     child: Text(
                       'Edit Profile',
                       style: GoogleFonts.lato(
-                        color: tDarkColor,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
@@ -159,8 +160,7 @@ class _buildProfileMenu extends StatelessWidget {
         title,
         style: GoogleFonts.openSans(
           color: tDarkColor,
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
+          fontSize: 18,
         ),
       ),
       trailing: endIcon
