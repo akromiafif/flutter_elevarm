@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_elevarm/app/data/colors.dart';
+import 'package:flutter_elevarm/app/data/constants.dart';
 import 'package:flutter_elevarm/app/modules/editprofile/controllers/editprofile_controller.dart';
+import 'package:flutter_elevarm/app/modules/login/widgets/rounded_button.dart';
+import 'package:flutter_elevarm/app/modules/login/widgets/rounded_input.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class EditProfileView extends GetView<EditprofileController> {
   const EditProfileView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    final allController = TextEditingController();
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.all(30),
+            padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 40),
             child: Column(
               children: <Widget>[
                 Stack(
                   children: [
                     SizedBox(
-                      width: 120,
-                      height: 120,
+                      width: 150,
+                      height: 150,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: const Image(
@@ -37,147 +41,61 @@ class EditProfileView extends GetView<EditprofileController> {
                         height: 35,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
-                          color: tPrimaryColor,
+                          color: kPrimaryColor,
                         ),
                         child: const Icon(
-                          LineAwesomeIcons.alternate_pencil,
-                          color: Colors.black,
+                          LineAwesomeIcons.camera,
+                          color: Colors.white,
                           size: 20,
                         ),
                       ),
                     )
                   ],
                 ),
-                const SizedBox(height: 20),
-                Text(
-                  'Afif Akromi',
-                  style: GoogleFonts.lato(
-                    color: tDarkColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  'socakromiafif@gmail.com',
-                  style: GoogleFonts.lato(
-                    color: tDarkColor,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: 200,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: tPrimaryColor,
-                      side: BorderSide.none,
-                      shape: const StadiumBorder(),
-                    ),
-                    child: Text(
-                      'Edit Profile',
-                      style: GoogleFonts.lato(
-                        color: tDarkColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ),
-                const Divider(),
                 const SizedBox(height: 30),
-                _buildProfileMenu(
-                  title: 'Settings',
-                  icon: LineAwesomeIcons.cog,
-                  endIcon: true,
-                  onPress: () {},
-                ),
-                _buildProfileMenu(
-                  title: 'Billing Details',
-                  icon: LineAwesomeIcons.wallet,
-                  endIcon: true,
-                  onPress: () {},
-                ),
-                _buildProfileMenu(
-                  title: 'User Management',
-                  icon: LineAwesomeIcons.user_check,
-                  endIcon: true,
-                  onPress: () {},
+                Column(
+                  children: <Widget>[
+                    RoundedInput(
+                      controller: allController,
+                      icon: Icons.person,
+                      size: size,
+                      hint: 'Username',
+                      isSecure: false,
+                    ),
+                    RoundedInput(
+                      controller: allController,
+                      icon: Icons.email,
+                      size: size,
+                      hint: 'Email',
+                      isSecure: false,
+                    ),
+                    RoundedInput(
+                      controller: allController,
+                      icon: Icons.fingerprint,
+                      size: size,
+                      hint: 'Password',
+                      isSecure: true,
+                    ),
+                    RoundedInput(
+                      controller: allController,
+                      icon: Icons.fingerprint,
+                      size: size,
+                      hint: 'Confirm Password',
+                      isSecure: true,
+                    ),
+                  ],
                 ),
                 const Divider(),
-                _buildProfileMenu(
-                  title: 'Information',
-                  icon: LineAwesomeIcons.info,
-                  endIcon: true,
-                  onPress: () {},
-                ),
-                _buildProfileMenu(
-                  title: 'Logout',
-                  icon: LineAwesomeIcons.alternate_sign_out,
-                  endIcon: false,
-                  onPress: () {},
-                ),
+                RoundedButton(
+                  title: 'EDIT',
+                  size: size,
+                  onTap: () {},
+                )
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class _buildProfileMenu extends StatelessWidget {
-  const _buildProfileMenu({
-    Key? key,
-    required this.title,
-    required this.icon,
-    required this.onPress,
-    required this.endIcon,
-  }) : super(key: key);
-
-  final String title;
-  final IconData icon;
-  final VoidCallback onPress;
-  final bool endIcon;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onPress,
-      leading: Container(
-        width: 30,
-        height: 30,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100),
-          color: tAccentColor.withOpacity(0.1),
-        ),
-        child: Icon(
-          icon,
-          color: tAccentColor,
-        ),
-      ),
-      title: Text(
-        title,
-        style: GoogleFonts.openSans(
-          color: tDarkColor,
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
-        ),
-      ),
-      trailing: endIcon
-          ? Container(
-              width: 30,
-              height: 30,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: Colors.grey.withOpacity(0.1),
-              ),
-              child: const Icon(
-                LineAwesomeIcons.angle_right,
-                color: Colors.grey,
-                size: 20,
-              ),
-            )
-          : null,
     );
   }
 }

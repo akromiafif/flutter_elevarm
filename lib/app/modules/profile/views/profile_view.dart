@@ -16,16 +16,37 @@ class ProfileView extends GetView<ProfileController> {
             padding: const EdgeInsets.all(30),
             child: Column(
               children: <Widget>[
-                SizedBox(
-                  width: 120,
-                  height: 120,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: const Image(
-                      image: AssetImage('assets/images/profile-3.jpg'),
-                      fit: BoxFit.cover,
+                Stack(
+                  children: [
+                    SizedBox(
+                      width: 120,
+                      height: 120,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: const Image(
+                          image: AssetImage('assets/images/profile-3.jpg'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
-                  ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        width: 35,
+                        height: 35,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: tPrimaryColor,
+                        ),
+                        child: const Icon(
+                          LineAwesomeIcons.alternate_pencil,
+                          color: Colors.black,
+                          size: 20,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
                 const SizedBox(height: 20),
                 Text(
