@@ -3,8 +3,8 @@ import 'package:flutter_elevarm/app/data/constants.dart';
 import 'package:flutter_elevarm/app/modules/editprofile/controllers/editprofile_controller.dart';
 import 'package:flutter_elevarm/app/modules/login/widgets/rounded_button.dart';
 import 'package:flutter_elevarm/app/modules/login/widgets/rounded_input.dart';
-import 'package:flutter_elevarm/app/modules/profile/views/profile_view.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class EditProfileView extends GetView<EditprofileController> {
@@ -91,7 +91,14 @@ class EditProfileView extends GetView<EditprofileController> {
                   title: 'EDIT',
                   size: size,
                   onTap: () {
-                    Get.offAll(() => const ProfileView());
+                    var userInfo = GetStorage().read('user-info');
+
+                    controller.editUser(
+                      userInfo["id"],
+                      controller.usernameController.text,
+                      controller.emailController.text,
+                      controller.passwordController.text,
+                    );
                   },
                 )
               ],

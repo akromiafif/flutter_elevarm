@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_elevarm/app/data/models/user.dart';
+import 'package:flutter_elevarm/app/modules/profile/views/profile_view.dart';
 import 'package:flutter_elevarm/app/providers/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -29,6 +30,21 @@ class EditprofileController extends GetxController {
       print(err);
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  void editUser(
+    String id,
+    String username,
+    String email,
+    String password,
+  ) async {
+    try {
+      await ServiceProvider().editUser(id, username, email, password);
+    } catch (err) {
+      print(err);
+    } finally {
+      Get.offAll(() => const ProfileView());
     }
   }
 }

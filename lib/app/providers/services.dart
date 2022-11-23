@@ -56,4 +56,31 @@ class ServiceProvider {
 
     return userFromJson(response.body);
   }
+
+  Future<User?> editUser(
+    String id,
+    String username,
+    String email,
+    String password,
+  ) async {
+    var response = await http.post(
+      Uri.parse('$BASE_URL/users/edit-user'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: json.encode(<String, String>{
+        'id': id,
+        'username': username,
+        'email': email,
+        'password': password,
+      }),
+    );
+
+    var data = json.decode(response.body);
+    if (response.statusCode == 200) {
+      return userFromJson(json.encode(data["result"]));
+    } else {
+      return null;
+    }
+  }
 }
