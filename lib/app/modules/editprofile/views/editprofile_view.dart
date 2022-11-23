@@ -3,6 +3,7 @@ import 'package:flutter_elevarm/app/data/constants.dart';
 import 'package:flutter_elevarm/app/modules/editprofile/controllers/editprofile_controller.dart';
 import 'package:flutter_elevarm/app/modules/login/widgets/rounded_button.dart';
 import 'package:flutter_elevarm/app/modules/login/widgets/rounded_input.dart';
+import 'package:flutter_elevarm/app/modules/profile/views/profile_view.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
@@ -11,7 +12,7 @@ class EditProfileView extends GetView<EditprofileController> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    final allController = TextEditingController();
+    Get.put(EditprofileController());
 
     return SafeArea(
       child: Scaffold(
@@ -56,28 +57,28 @@ class EditProfileView extends GetView<EditprofileController> {
                 Column(
                   children: <Widget>[
                     RoundedInput(
-                      controller: allController,
+                      controller: controller.usernameController,
                       icon: Icons.person,
                       size: size,
                       hint: 'Username',
                       isSecure: false,
                     ),
                     RoundedInput(
-                      controller: allController,
+                      controller: controller.emailController,
                       icon: Icons.email,
                       size: size,
                       hint: 'Email',
                       isSecure: false,
                     ),
                     RoundedInput(
-                      controller: allController,
+                      controller: controller.passwordController,
                       icon: Icons.fingerprint,
                       size: size,
                       hint: 'Password',
                       isSecure: true,
                     ),
                     RoundedInput(
-                      controller: allController,
+                      controller: controller.passwordController,
                       icon: Icons.fingerprint,
                       size: size,
                       hint: 'Confirm Password',
@@ -89,7 +90,9 @@ class EditProfileView extends GetView<EditprofileController> {
                 RoundedButton(
                   title: 'EDIT',
                   size: size,
-                  onTap: () {},
+                  onTap: () {
+                    Get.offAll(() => const ProfileView());
+                  },
                 )
               ],
             ),
