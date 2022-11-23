@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/editprofile/bindings/editprofile_binding.dart';
 import '../modules/editprofile/views/editprofile_view.dart';
+import '../modules/goride/bindings/goride_binding.dart';
+import '../modules/goride/views/goride_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -16,7 +18,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.LOGIN;
 
   static final routes = [
     GetPage(
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.HOME,
       page: () => const HomeView(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.GORIDE,
+      page: () => const GorideView(),
+      binding: GorideBinding(),
     ),
   ];
 }

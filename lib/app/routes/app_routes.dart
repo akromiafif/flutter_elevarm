@@ -8,6 +8,7 @@ abstract class Routes {
   static const PROFILE = _Paths.PROFILE;
   static const EDITPROFILE = _Paths.EDITPROFILE;
   static const HOME = _Paths.HOME;
+  static const GORIDE = _Paths.GORIDE;
 }
 
 abstract class _Paths {
@@ -17,4 +18,5 @@ abstract class _Paths {
   static const PROFILE = '/profile';
   static const EDITPROFILE = '/editprofile';
   static const HOME = '/home';
+  static const GORIDE = '/goride';
 }

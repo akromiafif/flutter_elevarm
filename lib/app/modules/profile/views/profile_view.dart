@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_elevarm/app/data/constants.dart';
 import 'package:flutter_elevarm/app/modules/editprofile/views/editprofile_view.dart';
+import 'package:flutter_elevarm/app/modules/home/views/home_view.dart';
 import 'package:flutter_elevarm/app/modules/login/views/login_view.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -15,6 +16,7 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     Get.put(ProfileController());
+    final UI = [const HomeView(), const ProfileView()];
 
     return SafeArea(
       child: Scaffold(
@@ -107,7 +109,6 @@ class ProfileView extends GetView<ProfileController> {
                             ),
                           ),
                         ),
-                        const Divider(),
                         const SizedBox(height: 30),
                         _buildProfileMenu(
                           title: 'Settings',

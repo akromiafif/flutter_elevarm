@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_elevarm/app/modules/home/views/home_view.dart';
 import 'package:flutter_elevarm/app/modules/profile/views/profile_view.dart';
 import 'package:flutter_elevarm/app/providers/services.dart';
 import 'package:get/get.dart';
@@ -44,7 +45,7 @@ class LoginController extends GetxController
         btnOkOnPress: () {},
       ).show();
     } else {
-      Get.to(() => ProfileView());
+      Get.to(() => const HomeView());
     }
   }
 
