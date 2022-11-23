@@ -11,6 +11,8 @@ class ProfileController extends GetxController {
   void onInit() {
     var userInfo = GetStorage().read('user-info');
     getUserInfo(userInfo["id"]);
+
+    print('init profile');
     super.onInit();
   }
 

@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_elevarm/app/data/models/user.dart';
-import 'package:flutter_elevarm/app/modules/profile/views/profile_view.dart';
+import 'package:flutter_elevarm/app/modules/home/views/home_view.dart';
 import 'package:flutter_elevarm/app/providers/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-class EditprofileController extends GetxController {
+class EditProfileController extends GetxController {
   var user = User(email: '', id: '', username: '', password: '').obs;
   var isLoading = true.obs;
   TextEditingController usernameController = TextEditingController();
@@ -19,6 +19,7 @@ class EditprofileController extends GetxController {
     usernameController.text = userInfo["username"];
     emailController.text = userInfo["email"];
 
+    print('init edit');
     super.onInit();
   }
 
@@ -44,7 +45,7 @@ class EditprofileController extends GetxController {
     } catch (err) {
       print(err);
     } finally {
-      Get.offAll(() => const ProfileView());
+      Get.offAll(() => const HomeView());
     }
   }
 }

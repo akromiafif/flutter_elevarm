@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_elevarm/app/data/constants.dart';
+import 'package:flutter_elevarm/app/modules/editprofile/views/editprofile_view.dart';
 import 'package:flutter_elevarm/app/modules/goride/views/goride_view.dart';
 import 'package:flutter_elevarm/app/modules/profile/views/profile_view.dart';
 
@@ -13,8 +14,6 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     Get.put(HomeController());
-
-    final UI = [const HomeView(), const ProfileView()];
 
     return GetBuilder<HomeController>(
       builder: (context) {
@@ -41,6 +40,12 @@ class HomeView extends GetView<HomeController> {
                 textColor: Colors.white,
                 iconSize: 30,
               ),
+              GButton(
+                icon: Icons.settings,
+                text: 'Settings',
+                textColor: Colors.white,
+                iconSize: 30,
+              ),
             ],
           ),
           body: IndexedStack(
@@ -48,6 +53,7 @@ class HomeView extends GetView<HomeController> {
             children: const [
               GorideView(),
               ProfileView(),
+              EditProfileView(),
             ],
           ),
         );

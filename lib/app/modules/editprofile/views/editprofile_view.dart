@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_elevarm/app/data/constants.dart';
 import 'package:flutter_elevarm/app/modules/editprofile/controllers/editprofile_controller.dart';
-import 'package:flutter_elevarm/app/modules/home/views/home_view.dart';
 import 'package:flutter_elevarm/app/modules/login/widgets/rounded_button.dart';
 import 'package:flutter_elevarm/app/modules/login/widgets/rounded_input.dart';
-import 'package:flutter_elevarm/app/modules/profile/views/profile_view.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
-class EditProfileView extends GetView<EditprofileController> {
+class EditProfileView extends GetView<EditProfileController> {
   const EditProfileView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    Get.put(EditprofileController());
-    final UI = [const HomeView(), const ProfileView()];
+    Get.put(EditProfileController());
 
     return SafeArea(
       child: Scaffold(
@@ -95,7 +92,7 @@ class EditProfileView extends GetView<EditprofileController> {
                   size: size,
                   onTap: () {
                     var userInfo = GetStorage().read('user-info');
-
+                    print(userInfo);
                     controller.editUser(
                       userInfo["id"],
                       controller.usernameController.text,
