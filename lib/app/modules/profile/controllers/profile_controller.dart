@@ -11,12 +11,12 @@ class ProfileController extends GetxController {
   void onInit() {
     var userInfo = GetStorage().read('user-info');
     getUserInfo(userInfo["id"]);
+    super.onInit();
   }
 
   void getUserInfo(String id) async {
     try {
       var response = await ServiceProvider().getUserInfo(id);
-      print(response);
       user.value = response;
     } catch (err) {
       print(err);

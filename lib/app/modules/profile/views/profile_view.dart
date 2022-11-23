@@ -1,30 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_elevarm/app/data/constants.dart';
+import 'package:flutter_elevarm/app/modules/login/views/login_view.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
+  @override
   const ProfileView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    Get.put(ProfileController());
+
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Obx(
-            () => controller.isLoading.value
-                ? Center(
-                    child: Text(
-                      "Loading...",
-                      style: GoogleFonts.lato(
-                        color: tDarkColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+        body: Obx(
+          () => controller.isLoading.value
+              ? Center(
+                  child: Text(
+                    "Loading...",
+                    style: GoogleFonts.lato(
+                      color: tDarkColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
                     ),
-                  )
-                : Container(
+                  ),
+                )
+              : SingleChildScrollView(
+                  child: Container(
                     padding: const EdgeInsets.symmetric(
                         vertical: 70, horizontal: 40),
                     child: Column(
@@ -129,12 +135,15 @@ class ProfileView extends GetView<ProfileController> {
                           title: 'Logout',
                           icon: LineAwesomeIcons.alternate_sign_out,
                           endIcon: false,
-                          onPress: () {},
+                          onPress: () {
+                            GetStorage().remove('user-info');
+                            Get.offAll(() => LoginView());
+                          },
                         ),
                       ],
                     ),
                   ),
-          ),
+                ),
         ),
       ),
     );

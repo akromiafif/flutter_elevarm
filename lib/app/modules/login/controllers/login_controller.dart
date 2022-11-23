@@ -44,7 +44,7 @@ class LoginController extends GetxController
         btnOkOnPress: () {},
       ).show();
     } else {
-      Get.to(() => const ProfileView());
+      Get.to(() => ProfileView());
     }
   }
 

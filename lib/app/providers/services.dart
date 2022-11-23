@@ -54,7 +54,6 @@ class ServiceProvider {
     final response =
         await client.get(Uri.parse('$BASE_URL/users/user-info/$id'));
 
-    print(response.body);
     return userFromJson(response.body);
   }
 }
