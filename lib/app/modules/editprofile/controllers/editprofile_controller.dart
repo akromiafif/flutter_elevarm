@@ -19,7 +19,6 @@ class EditProfileController extends GetxController {
     usernameController.text = userInfo["username"];
     emailController.text = userInfo["email"];
 
-    print('init edit');
     super.onInit();
   }
 
