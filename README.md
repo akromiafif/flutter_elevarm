@@ -1,16 +1,7 @@
-# flutter_elevarm
-
-A new Flutter project.
-
 ## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Step by step to run this project
+1. Clone this repo to your local machine.
+2. Open project with your favorite editor (ex. VS Code, etc).
+3. In the project open terminal and execute command "flutter pub get" (to download all required library)
+4. Open your android emulator
+5. In the terminal execute command "flutter run" (to run the app)
